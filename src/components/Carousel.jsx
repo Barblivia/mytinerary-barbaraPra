@@ -2,20 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const cities = [
-  { name: 'Rio de Janeiro', image: '/img/city1_Rio.jpg' },
-  { name: 'Paris', image: '/img/city2_Paris.jpg' },
-  { name: 'Tokyo', image: '/img/city3_Tokyo.jpg' },
-  { name: 'Dublin', image: '/img/city4_Dublin.jpg' },
-  { name: 'Havana', image: '/img/city5_Havana.jpg' },
-  { name: 'Florence', image: '/img/city6_Florence.jpg' },
-  { name: 'Delhi', image: '/img/city7_Delhi.jpg' },
-  { name: 'Copenhagen', image: '/img/city8_Copenhagen.jpg' },
-  { name: 'New York', image: '/img/city9_NewYork.jpg' },
-  { name: 'Berlin', image: '/img/city10_Berlin.jpg' },
-  { name: 'Beijing', image: '/img/city11_Beijing.jpg' },
-  { name: 'Dubai', image: '/img/city12_Dubai.jpg' },
+  { name: 'Rio de Janeiro - Brazil', image: '/img/city1_Rio.jpg' },
+  { name: 'Paris - France', image: '/img/city2_Paris.jpg' },
+  { name: 'Tokyo - Japan', image: '/img/city3_Tokyo.jpg' },
+  { name: 'Dublin - Ireland', image: '/img/city4_Dublin.jpg' },
+  { name: 'Havana - Cuba', image: '/img/city5_Havana.jpg' },
+  { name: 'Florence - Italy', image: '/img/city6_Florence.jpg' },
+  { name: 'Delhi - India', image: '/img/city7_Delhi.jpg' },
+  { name: 'Copenhagen - Denmark', image: '/img/city8_Copenhagen.jpg' },
+  { name: 'New York - USA', image: '/img/city9_NewYork.jpg' },
+  { name: 'Berlin - Germany', image: '/img/city10_Berlin.jpg' },
+  { name: 'Beijing - China', image: '/img/city11_Beijing.jpg' },
+  { name: 'Dubai - UAE', image: '/img/city12_Dubai.jpg' },
 ];
-
 
 const itemsPerSlide = 4;
 
@@ -32,22 +31,27 @@ const Carousel = () => {
 
   return (
     <section className="carousel p-4 flex flex-col items-center">
-      <h2 className="text-3xl font-bold mb-4 text-white tracking-wider">Popular MyTineraries</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+      <h2 className="bg-sky-800/30 text-3xl font-bold mb-2 text-cyan-400 p-3 tracking-wider">Popular MyTineraries</h2>
+      {/* agregar formato*/}
+      <div className="flex justify-center w-4/6 min-h-[40vh]">
         {Array.from({ length: Math.ceil(cities.length / itemsPerSlide) }).map((_, slideIndex) => (
           <div
             key={slideIndex}
-            className={`border border-black p-2 ${slideIndex === currentSlide ? 'block' : 'hidden'}`}
+            className={`border border-cyan-500 p-2 ${slideIndex === currentSlide ? 'block' : 'hidden'}`}
           >
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {cities.slice(slideIndex * itemsPerSlide, (slideIndex + 1) * itemsPerSlide).map((city, cityIndex) => (
                 <div key={cityIndex} className="mb-4 flex flex-col items-center">
                   <img
                     src={city.image}
                     alt={city.name}
-                    className="w-60 h-60 object-cover rounded-lg"
+                    className="w-full h-full object-cover rounded-lg"
                   />
-                  <p className="text-center mt-2">{city.name}</p>
+                  <p className="bg-sky-800/30 text-center mt-2">
+    <span className="text-xl font-bold tracking-wide text-blue-950 hover:text-blue-600">
+    {city.name}
+  </span>
+</p>
                 </div>
               ))}
             </div>
@@ -59,7 +63,7 @@ const Carousel = () => {
           <span
             key={slideIndex}
             className={`dot inline-block w-2 h-2 rounded-full mx-1 ${
-              slideIndex === currentSlide ? 'bg-black' : 'bg-black'
+              slideIndex === currentSlide ? 'bg-white' : 'bg-white'
             }`}
             onClick={() => setCurrentSlide(slideIndex)}
           />

@@ -2,8 +2,10 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <section className="hero">
-      <h2>Find your perfect trip, designed by insiders who know and love their cities!</h2>
+    <section className="bg-blue-950/50 text-white p-10 flex justify-center items-center">
+      <h2 className="text-4xl font-bold tracking-wider">
+        Find the perfect destination
+      </h2>
     </section>
   );
 };
