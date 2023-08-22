@@ -31,13 +31,13 @@ const Carousel = () => {
 
   return (
     <section className="carousel p-4 flex flex-col items-center">
-      <h2 className="bg-sky-800/30 text-3xl font-bold mb-2 text-cyan-400 p-3 tracking-wider">Popular MyTineraries</h2>
-      {/* agregar formato*/}
+      <h2 className="bg-sky-800/30 text-3xl font-bold mb-2 text-white p-3 tracking-wider">Popular MyTineraries</h2>
+      
       <div className="flex justify-center w-4/6 min-h-[40vh]">
         {Array.from({ length: Math.ceil(cities.length / itemsPerSlide) }).map((_, slideIndex) => (
           <div
             key={slideIndex}
-            className={`border border-cyan-500 p-2 ${slideIndex === currentSlide ? 'block' : 'hidden'}`}
+            className={`${slideIndex === currentSlide ? 'block' : 'hidden'}`}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {cities.slice(slideIndex * itemsPerSlide, (slideIndex + 1) * itemsPerSlide).map((city, cityIndex) => (

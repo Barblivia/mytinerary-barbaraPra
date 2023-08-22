@@ -25,7 +25,7 @@ const Header = () => {
         </ul>
         <button className="flex items-center bg-sky-900 rounded-md border-cyan-500 p-1">
           {/*<span className="text-white"></span>*/}
-          <img src="/ico/user-regular.ico" alt="Avatar" className="w-8 h-6 rounded-full" />
+          <img src="/ico/user.ico" alt="Avatar" className="w-8 h-6 rounded-full" />
         </button>
       </nav>
     </header>

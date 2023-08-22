@@ -1,8 +1,9 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+import Layout from '../layouts/Layout'
 import Home from '../pages/index/Home'
 import Cities from '../pages/index/Cities'
-import Layout from '../layouts/Layout'
+import CityDetails from "../pages/index/CityDetails";
 
 const router = createBrowserRouter([
 {
@@ -19,8 +20,12 @@ const router = createBrowserRouter([
         element: <Cities />
          },
          { 
+            path:'/cities/:id', 
+            element: <CityDetails />
+             },
+         { 
         path:'*', 
-        element: <h1 className="">Error page</h1>
+        element: <h1 className="text-6xl font-bold">Error page: Not Found</h1>
          },
     ],
 },
