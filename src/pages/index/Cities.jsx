@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Card from '../../components/Card';
+import { useDispatch, useSelector } from 'react-redux';
+import { filter_cities, get_cities } from '../../store/actions/cityActions.js';
+
 
 const Cities = () => {
-    const [cities, setCities] = useState([]);
-    const [searchTerm, setSearchTerm] = useState(''); 
+    
+    const cities = useSelector((store) => store.cityReducer.cities)
+    const dispatch = useDispatch()
 
-    useEffect(() => {
-        fetchCities();
-    }, [searchTerm]); 
+    useEffect(()=>{
+        dispatch(get_cities()) 
+    },[]);
 
-    const fetchCities = async () => {
-        try {
-            const response = await axios.get(`http://localhost:3000/api/cities?city=${searchTerm}`);
-            setCities(response.data.cities);
-        } catch (error) {
-            console.log(error);
-            setCities([]); 
-        }
-    };
-
-    const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
+    const handleInputChange = (city) => {
+        const searchTerm = city.target.value.toLowerCase();
+        dispatch(filter_cities({ city: searchTerm }));
+      };
+      
 
     return (
         <div className='flex flex-col items-center text-center mb-8'>

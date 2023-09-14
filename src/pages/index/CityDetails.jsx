@@ -36,7 +36,7 @@ const CityDetails = () => {
   return (
     <div>
       <h2 className=" bg-cyan-700/50 text-blue-50 text-3xl text-center mb-4 p-3">
-        City Details: {cityDetails ? cityDetails.city : "Loading..."}
+        Visit your special City: {cityDetails ? cityDetails.city : "Loading..."}
       </h2>
       <div className="mx-auto w-1/4">
         {cityDetails && (
@@ -48,20 +48,26 @@ const CityDetails = () => {
         )}
       </div>
 
-      <h3 className="bg-cyan-700/50 text-blue-50 text-center text-3xl my-4">Itineraries for {cityDetails ? cityDetails.city : "Loading..."}</h3>
+      <h3 className="bg-cyan-700/50 text-blue-50 text-center text-3xl my-4">
+        Itineraries for {cityDetails ? cityDetails.city : "Loading..."}
+        </h3>
 
-      <div className="flex flex-wrap justify-center">
-        {itineraries.map((itinerary) => (
-          <ItineraryCard key={itinerary._id} itinerary={itinerary} />
-        ))}
-      </div>
-
-      <div className="flex justify-center mt-4">
-        <Link to="/cities" className="text-blue-50 text-xl hover:underline">
-          Back to Cities
-        </Link>
-      </div>
+        {itineraries.length === 0 ? (
+    <p className="text-center text-xl text-blue-50">No itineraries found</p>
+  ) : (
+    <div className="flex flex-wrap justify-center gap-4">
+      {itineraries.map((itinerary) => (
+        <ItineraryCard key={itinerary._id} itinerary={itinerary} />
+      ))}
     </div>
+  )}
+
+  <div className="flex justify-center mt-4">
+    <Link to="/cities" className="text-blue-50 text-xl hover:underline">
+      Back to Cities
+    </Link>
+  </div>
+</div>
   );
 };
 
