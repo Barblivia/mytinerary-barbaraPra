@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../store/actions/userAction';
+import GoogleSignIn from './GoogleSignIn.jsx'
 
 const SignInForm = () => {
   
@@ -66,6 +67,8 @@ const SignInForm = () => {
             required
           />
         </div>
+        <div className='flex justify-center mb-2'>
+                    <GoogleSignIn  /></div>
             <button
           type="submit"
           className="w-full bg-sky-900 text-white p-2 rounded-md hover:bg-cyan-600"
