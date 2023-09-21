@@ -1,35 +1,40 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../store/actions/userAction';
-import GoogleSignIn from './GoogleSignIn.jsx'
+import { useDispatch, useSelector} from 'react-redux';
+import { signInUser } from '../store/actions/userAction';
+import GoogleSignIn from './GoogleSignIn.jsx';
+
 
 const SignInForm = () => {
-  
+
+  const store = useSelector(store => store.userReducer)
+  //console.log(store)
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
   });
-
   const dispatch = useDispatch();
 
   //const [error, setError] = useState('');
 
-  const handleChange = (e) => {
+  const handleInput = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
+ // console.log(formData)
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
-      dispatch(loginUser(formData));
-      
-    } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred during sign in.');
+      dispatch(signInUser({
+        data: formData
+      })) 
+   
+    } catch (error) {
+       console.log(error);
     }
   };
 
@@ -46,7 +51,7 @@ const SignInForm = () => {
             id="email"
             name="email"
             value={formData.email}
-            onChange={handleChange}
+            onChange={handleInput}
             placeholder="Enter your email"
             className="w-full p-2 border rounded-md"
             required
@@ -61,21 +66,20 @@ const SignInForm = () => {
             id="password"
             name="password"
             value={formData.password}
-            onChange={handleChange}
+            onChange={handleInput}
             placeholder="Enter your password"
             className="w-full p-2 border rounded-md"
             required
           />
         </div>
         <div className='flex justify-center mb-2'>
-                    <GoogleSignIn  /></div>
+            <GoogleSignIn  /></div>
             <button
-          type="submit"
-          className="w-full bg-sky-900 text-white p-2 rounded-md hover:bg-cyan-600"
-        >
-          Sign In
-        </button>
-        <div className="flex items-center justify-between pb-6">
+              className="w-full bg-sky-900 text-white p-2 rounded-md hover:bg-cyan-600"
+              type="submit" onClick={handleSubmit}>Sign in 
+            </button>
+            
+          <div className="flex items-center justify-between pb-6">
           <p className="text-sky-900 mb-0 m-2 gap-4">Want to join? Create an account!!!</p>
           <Link to="/signup" className="nav-link text-sky-900 m-2 text-xl hover:underline">
             Sign up

@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logoutUser } from '../store/actions/userAction'; 
+import { signOutUser } from '../store/actions/userAction'; 
 
 
 const Header = () => {
+ 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer.user);
-  const [showMenu, setShowMenu] = useState(false);
-
-  const handleSignOut = () => {
-    dispatch(logoutUser());
+  const defaultimage = '/ico/user.ico'
+  
+    const handleSignOut = () => {
+    dispatch(signOutUser());
   };
 
   return (
@@ -35,8 +36,7 @@ const Header = () => {
             <li className="nav-item">
               <button
                 onClick={handleSignOut}
-                className="nav-link text-white cursor-pointer"
-              >
+                className="nav-link text-white cursor-pointer">
                 Sign Out
               </button>
             </li>
@@ -50,11 +50,10 @@ const Header = () => {
         </ul>
         <button
           className="flex items-center bg-sky-900 rounded-md border-cyan-500 p-1"
-          onClick={() => setShowMenu(!showMenu)}
         >
           <img
-            src={user ? user.image : '/ico/user.ico'}
-            alt="User"
+            src={user ? user.image : defaultimage}
+            alt={user ? user.name : "User"}
             className="w-8 h-6 rounded-full"
           />
         </button>

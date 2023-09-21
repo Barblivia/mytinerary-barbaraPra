@@ -6,6 +6,7 @@ import Cities from '../pages/index/Cities'
 import CityDetails from "../pages/index/CityDetails";
 import SignInPage from '../pages/index/SignInPage';
 import SignUpPage from '../pages/index/SignUpPage';
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -26,18 +27,25 @@ const router = createBrowserRouter([
       },
       {
         path: '/signin',
-        element: <SignInPage />
-      },
+        element: (<ProtectedRoute path='/'>
+             <SignInPage />
+        </ProtectedRoute>)
+         },
       {
         path: '/signup', 
         element: <SignUpPage /> 
       },
       {
         path: '*',
-        element: <h1 className="text-6xl font-bold">Error page: Not Found</h1>,
+        element: <h1 className="text-6xl font-bold">Error page</h1>,
       },
+      {
+        path: '/404',
+        element: <h1 className="text-6xl font-bold">Error page: Not Found</h1>,
+      }
     ],
   },
 ]);
 
 export default router;
+

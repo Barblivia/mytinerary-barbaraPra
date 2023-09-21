@@ -1,22 +1,34 @@
+//import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from 'react-redux'
+import { signInGoogle } from '../store/actions/userAction.js'
 
 const GoogleSignIn = () => {
     
     const googleButton = useRef();
+   
+    const store = useSelector(store => store.userReducer)
+    //console.log(store);
+    const dispatch = useDispatch();
     
-    const handleCredentialResponse = async (response) => {
-       // console.info('JWT GOOGLE:', response.credential);
-       const data = {
-        token_id: response.credential
-       }
-       const userResponse = await axios.post(`http://localhost:3000/api/auth/google`, data);
-       console.log(userResponse)
+    const handleCredentialResponse= async(response)=> {
+        const data= {
+        token_id : response.credential
     }
+    try {
+        dispatch(signInGoogle({
+          data
+        })) 
+      } catch (error) {
+        console.log(error);
+      }
+      /* console.log("JWT Google " + response.credential); */
+    /* const userResponse = await axios.post('http://localhost:3000/api/auth/google', data)
+    console.log(userResponse); */
+  }
     useEffect (() => {
         if(window.google) {
-            window.google.accounts.id.initialize({
+        window.google.accounts.id.initialize({
                 client_id: "1048062830252-ckdg0mtlls0i4km5qeorr395jq9cv15l.apps.googleusercontent.com",
                 callback: handleCredentialResponse
             });
