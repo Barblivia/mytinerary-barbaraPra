@@ -15,21 +15,21 @@ const GoogleSignIn = () => {
         const data= {
         token_id : response.credential
     }
-    try {
+     try {
         dispatch(signInGoogle({
           data
         })) 
       } catch (error) {
         console.log(error);
-      }
-      /* console.log("JWT Google " + response.credential); */
-    /* const userResponse = await axios.post('http://localhost:3000/api/auth/google', data)
-    console.log(userResponse); */
+      } 
+   /*  console.log("JWT Google " + response.credential); 
+    const userResponse = await axios.post('http://localhost:3000/api/auth/google', data) */
+    //console.log(userResponse); 
   }
     useEffect (() => {
         if(window.google) {
         window.google.accounts.id.initialize({
-                client_id: "1048062830252-ckdg0mtlls0i4km5qeorr395jq9cv15l.apps.googleusercontent.com",
+                client_id: "742751650147-udj5q26lbjce269jm98uset3sq76h5ta.apps.googleusercontent.com",
                 callback: handleCredentialResponse
             });
             window.google.accounts.id.renderButton(

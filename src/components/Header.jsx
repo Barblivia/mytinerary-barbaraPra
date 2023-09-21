@@ -10,10 +10,15 @@ const Header = () => {
   const user = useSelector((state) => state.userReducer.user);
   const defaultimage = '/ico/user.ico'
   
-    const handleSignOut = () => {
-    dispatch(signOutUser());
-  };
-
+    const handleSignOut = async () => {
+        try {
+         const token = localStorage.getItem ('token');
+         dispatch(signOutUser(token, user));
+        } catch (error) {
+          console.log(error);
+                 }
+             }; 
+ 
   return (
     <header className="bg-gradient-to-r from-sky-950 to-cyan-600 flex flex-wrap justify-center sm:flex-nowrap sm:justify-between items-center px-4 py-3">
       {/* Logo and App name */}

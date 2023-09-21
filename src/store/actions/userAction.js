@@ -46,6 +46,7 @@ export const signInGoogle = createAsyncThunk('signInGoogle', async (obj) =>{
         console.log(data)
         localStorage.setItem('token', data.response.token)
         localStorage.setItem('user',JSON.stringify(data.response.user)) 
+        window.location.reload()
         return {
             user:data.data.response.user,
             token: data.data.response.token

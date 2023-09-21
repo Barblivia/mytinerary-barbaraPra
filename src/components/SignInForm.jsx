@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import { signInUser } from '../store/actions/userAction';
-import GoogleSignIn from './GoogleSignIn.jsx';
-
+import  GoogleSignIn  from './GoogleSignIn.jsx';
+import Swal from 'sweetalert2';
 
 const SignInForm = () => {
 
   const store = useSelector(store => store.userReducer)
-  //console.log(store)
+//  console.log(store)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -23,19 +23,30 @@ const SignInForm = () => {
       [e.target.name]: e.target.value,
     });
   };
- // console.log(formData)
+// console.log(formData)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-      dispatch(signInUser({
-        data: formData
-      })) 
-   
-    } catch (error) {
-       console.log(error);
-    }
+      const response = await dispatch(signInUser({data: formData})); 
+      
+      if (response.payload.user) {
+        Swal.fire({
+        icon: 'success',
+        title: 'Success!!!',
+        text: 'You are now signed in!',
+      });
+    } else {
+      Swal.fire({
+      icon: 'error',
+      title: 'Error!',
+      text: 'Sign in failed. Please check your email and password.',
+    });}
+  }
+    catch (error) {
+      console.error(error)
+  }
   };
 
   return (
@@ -74,11 +85,12 @@ const SignInForm = () => {
         </div>
         <div className='flex justify-center mb-2'>
             <GoogleSignIn  /></div>
+          {/* SUBMIT SIGN IN */}
             <button
               className="w-full bg-sky-900 text-white p-2 rounded-md hover:bg-cyan-600"
               type="submit" onClick={handleSubmit}>Sign in 
             </button>
-            
+         {/* TO SIGN UP */}
           <div className="flex items-center justify-between pb-6">
           <p className="text-sky-900 mb-0 m-2 gap-4">Want to join? Create an account!!!</p>
           <Link to="/signup" className="nav-link text-sky-900 m-2 text-xl hover:underline">

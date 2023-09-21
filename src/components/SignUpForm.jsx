@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUpUser } from '../store/actions/userAction';
+import Swal from 'sweetalert2';
 
 const SignUpForm = () => {
   
@@ -24,20 +25,32 @@ const SignUpForm = () => {
   };
 
   
-  const handleSignUp = async(e) =>{
+  const handleSubmit = async(e) =>{
     e.preventDefault();
     try {
       dispatch(signUpUser({
         data: formData
       })) 
+      Swal.fire
+({
+        icon: 'success',
+        title: 'Success!!!',
+        text: 'User registered!',
+        footer: '<a href="/signin">Now, please Sign In</a>'
+    })
        } catch (error) {
-      console.log(error);
-    }
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'User registration failed.',
+        });
+      }
   }
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-sky-200 bg-opacity-50 shadow-md rounded-md">
       <h2 className="text-2xl font-semibold text-center text-sky-900 mb-4">Create an Account</h2>
-        <form onSubmit={handleSignUp}>
+        <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="name" className="block font-medium text-gray-700">
             Name

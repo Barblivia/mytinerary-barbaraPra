@@ -4,7 +4,7 @@ import axios from "axios"
 import { useEffect } from 'react';
 import { useDispatch } from "react-redux"
 import { user_token } from "./store/actions/userAction.js"
-//import './App.css';
+
 
 
 function App() {
@@ -13,7 +13,9 @@ function App() {
    useEffect(() => {
      let url = `http://localhost:3000/api/auth/token`
      let token = localStorage.getItem('token')
- 
+
+     //console.log(token)
+
       if (token) {
        let configs = { headers: { 'Authorization': `Bearer ${token}` } }
  
